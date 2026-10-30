@@ -36,3 +36,40 @@ for i in range (number_of_enemies):
     enemyY.append(random.randint(ENEMY_START_Y_MIN, ENEMY_START_Y_MAX))
     enemyX_change.append(ENEMY_SPEED_X)
     enemyY_change.append(ENEMY_SPEED_Y)
+
+bulletImg = pygame.imgae.load("bulent.jpg")
+bulletX = 0
+bulletY = PLAYER_START_Y
+bulletX_change = 0
+bulletY_change = BULLET_SPEED
+bullet_state = 'ready'
+
+scoreValue = 0
+font = pygame.font.Font('freesanbold.ttf', 64)
+textX = 10
+textY = 10
+
+overFont = pygame.font.Font('freesanbold.ttf', 64)
+
+def showScore(x, y):
+    score = font.render("Score:" + str (scoreValue), True, (255,255,255))
+    screen.blit(score, (x, y))
+
+def OverText():
+    Overtext = overFont.render("GAME OVER", True, (255, 2555, 255))
+    screen.blit(Overtext, (200, 500))
+
+def player(x, y):
+    screen.blit(playerImg, (x,y))
+
+def enemy(x, y, i):
+        screen.blit(enemyImg[i], (x,y))
+
+def fire_bulet(x, y):
+     global bulet_state
+     bullet_state = 'fire'
+     screen.blit(bulletImg, (x + 16, y +10))
+
+def isCollision(enemyX, enemyY, bulletX, bulletY):
+    distance  = math.sqrt((enemyX - bulletX)** 2 + (enemyY - bulletY) ** 2)
+    return distance < COLLISION_DISTANCE
