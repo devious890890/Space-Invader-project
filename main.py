@@ -1,6 +1,7 @@
 import pygame
 import random
 import math
+import pygame.mixer
 
 SCREENWIDTH = 800
 SCREENHEIGHT = 600
@@ -14,6 +15,12 @@ BULLET_SPEED = 50
 COLLISION_DISTANCE = 27
 
 pygame.init()
+pygame.mixer.init()
+
+pygame.mixer.music.load("background.ogg")
+pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.play(-1) 
+
 screen = pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT))
 background = pygame.image.load("background.jpg")
 Caption = pygame.display.set_caption("Space Invaders")
@@ -73,6 +80,9 @@ def fire_bulet(x, y):
 def isCollision(enemyX, enemyY, bulletX, bulletY):
     distance  = math.sqrt((enemyX - bulletX)** 2 + (enemyY - bulletY) ** 2)
     return distance < COLLISION_DISTANCE
+
+
+
 
 running  = True
 while  running:
